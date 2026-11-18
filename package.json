@@ -1,0 +1,77 @@
+{
+  "name": "vue-memory-leak-detector",
+  "version": "0.1.0",
+  "description": "Dev-only Vue 3 memory-leak detector. A Vue plugin watches every component instance, and an optional Vite plugin pins a marker into each <script setup> scope; the detector warns in the console (and emits events) when an unmounted component is still held in memory after a garbage collection.",
+  "keywords": [
+    "vue",
+    "vue3",
+    "memory-leak",
+    "leak-detection",
+    "heap-snapshot",
+    "vite",
+    "vite-plugin",
+    "devtools",
+    "weakref",
+    "finalizationregistry",
+    "debugging"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./vite": {
+      "types": "./dist/vite.d.ts",
+      "default": "./dist/vite.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.build.json",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "demo:install": "node scripts/install-demo.mjs",
+    "demo": "npm --prefix demo run dev",
+    "e2e": "playwright test",
+    "prepublishOnly": "npm test && npm run typecheck && npm run build",
+    "bundle:check": "node scripts/check-bundle.mjs"
+  },
+  "license": "MIT",
+  "author": "mvladm14",
+  "peerDependencies": {
+    "vite": ">=5",
+    "vue": ">=3.3.0"
+  },
+  "peerDependenciesMeta": {
+    "vite": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "magic-string": "^1.4.5"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.62.1",
+    "@types/node": "^24.19.2",
+    "@vitejs/plugin-vue": "^6.0.11",
+    "jsdom": "^29.1.1",
+    "typescript": "~6.0",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.1",
+    "vue": "^3.5.45"
+  }
+}
